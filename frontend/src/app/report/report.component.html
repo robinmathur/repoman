@@ -1,0 +1,40 @@
+<div class="container col-6 mt-3">
+  <form [formGroup]="userForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="reportTitle">Report Name</label>
+      <input type="text" class="form-control" formControlName="reportTitle" name="reportTitle" id="reportTitle">
+    </div>
+    <div class="form-group">
+      <label for="reportType">Report Type</label>
+      <select class="form-control" formControlName="reportType" name="reportType" id="reportType">
+        <option *ngFor="let type of reportTypes" [value]="type">{{type}}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="dateFrom">Date From</label>
+        <input type="date" class="form-control" formControlName="dateFrom" name="dateFrom" id="dateFrom">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="dateTo">Date To</label>
+        <input type="date" class="form-control" formControlName="dateTo" name="dateTo" id="dateTo">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="upload">Upload reports</label>
+      <input type="file" formControlName="reports" (change)="selectFile($event)" class="form-control" id="upload" multiple>
+    </div>
+    <div class="form-group">
+      <table class="table table-striped" title="Uploaded Reports">
+        <tbody>
+        <tr *ngFor="let file of files | keyvalue ">
+          <td><i class="fas fa-file-excel"></i></td>
+          <td>{{ file.key }}</td>
+          <td><button (click)="removeFile(file.key)">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Merger</button>
+  </form>
+</div>
